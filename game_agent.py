@@ -223,10 +223,8 @@ class MinimaxPlayer(IsolationPlayer):
             
             #if depth==-1:
             #    raise SearchTimeout()
-            if depth==0:
-                #print (type(super(MinimaxPlayer,self)))
-                return self.score(game,self)
-            elif game.utility(self)!=0:
+            
+            if game.utility(self)!=0:
                 #if flag=='min':
                 #    return 1
                 #else: return -1
@@ -242,7 +240,11 @@ class MinimaxPlayer(IsolationPlayer):
             """
             if self.time_left() < self.TIMER_THRESHOLD:
                 raise SearchTimeout()
-                
+            
+            if depth<=0:
+                #print (type(super(MinimaxPlayer,self)))
+                return self.score(game,self)
+            
             flag='min'
             check=terminal_test(self,game,depth,flag)
             if check:
@@ -262,6 +264,11 @@ class MinimaxPlayer(IsolationPlayer):
             flag='max'
             if self.time_left() < self.TIMER_THRESHOLD:
                 raise SearchTimeout()
+                
+            
+            if depth<=0:
+                #print (type(super(MinimaxPlayer,self)))
+                return self.score(game,self)
             
             check=terminal_test(self,game,depth,flag)
             if check:
